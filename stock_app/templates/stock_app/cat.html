@@ -1,0 +1,22 @@
+{% extends 'stock_app/layout.html' %}
+
+{% block body %}
+    <div>
+        <div class="header">
+            <h1>Request for new category.</h1>
+        </div>
+        
+        {% if user.is_authenticated %}
+           <div class="img-form">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{c_form}}
+                    <div style="margin-bottom: 5px;"></div>
+                    <input type="Submit" class="btn btn-primary">
+                </form>
+            </div>
+        {% else %}
+            <div class="sorry">Sorry! You have to <a href="{% url 'login' %}">login</a>. 😔</div>
+        {% endif %}
+    </div>
+{% endblock %}

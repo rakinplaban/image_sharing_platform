@@ -1,0 +1,140 @@
+.bg-model {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.9;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.bg-model-5 {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.9;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.model-content {
+  width: 500px;
+  height: 522px;
+  background-color: white;
+  opacity: 1;
+  border-radius: 50px;
+  position: relative;
+}
+.model-content h1 {
+  text-align: center;
+  margin-top: 18px;
+}
+
+.bg-model-1 {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 0.9;
+  position: absolute;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+
+.model-content-1 {
+  width: 500px;
+  height: 500px;
+  background-color: white;
+  opacity: 1;
+  border-radius: 50px;
+  position: relative;
+}
+.model-content-1 h1 {
+  text-align: center;
+  margin-top: 18px;
+}
+
+.model-content-5 {
+  width: 500px;
+  height: 500px;
+  background-color: white;
+  opacity: 1;
+  border-radius: 50px;
+  position: relative;
+}
+.model-content-5 h1 {
+  text-align: center;
+  margin-top: 18px;
+}
+
+.img-form {
+  margin: 2% 2% 2% 2%;
+  align-items: center;
+}
+.img-form label {
+  color: red;
+}
+
+.close {
+  position: absolute;
+  right: 6%;
+  top: 2%;
+  transform: rotate(45deg);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.header {
+  align-items: center;
+}
+
+.close-1 {
+  position: absolute;
+  right: 6%;
+  top: 2%;
+  transform: rotate(45deg);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.close-5 {
+  position: absolute;
+  right: 6%;
+  top: 2%;
+  transform: rotate(45deg);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.sorry {
+  color: green;
+  font-weight: bold;
+}
+
+.search {
+  margin: 0% 10% 0% 10%;
+}
+.search .text-form {
+  width: 75%;
+}
+.search .submit-btn {
+  margin-top: -6%;
+  margin-left: 74%;
+}
+
+.add-wishlist i {
+  color: blue;
+}
+
+.remove-wishlist i {
+  color: red;
+}/*# sourceMappingURL=style.css.map */

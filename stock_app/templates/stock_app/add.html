@@ -1,0 +1,116 @@
+{% extends 'stock_app/layout.html' %}
+
+{% load static %}
+{% load social_share %}
+{% block title %}Home {% endblock %}
+
+{% block body %}
+    <div class="bg-model-5">
+        <div class="model-content-5">
+            <a href="{% url 'index' %}" style="color:black;">
+                <div class="close">+</div>
+            </a>
+            <h1>Upload Image</h1>
+            {% if user.is_authenticated %}
+                <div class="img-form">
+                    <form action="{% url 'index' %}" method="POST" enctype="multipart/form-data" class="form-group">
+                        {% csrf_token %}
+                        {{i_form}}
+                        <div style="margin-bottom: 2px;"></div>
+                        <input type="Submit" class="btn btn-primary">
+                    </form>
+                </div>
+            {% else %}
+                <div class="sorry">Sorry! You have to <a href="{% url 'login' %}">login</a>. 😔</div>
+            {% endif %}
+            
+        </div>
+    </div>
+    <!-- <div class="bg-model-1">
+        <div class="model-content-1">
+            <div class="close-1">+</div>
+            <h1>Upload Image</h1>
+            {% if user.is_authenticated %}
+                <div class="img-form">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {{c_form}}
+                        <div style="margin-bottom: 5px;"></div>
+                        <input type="Submit" class="btn btn-primary">
+                    </form>
+                </div>
+            {% else %}
+                <div class="sorry">Sorry! You have to <a href="{% url 'login' %}" class="btn btn-danger">login</a>. 😔</div>
+            {% endif %}
+            
+        </div>
+    </div> -->
+    {% if not user.is_authenticated %}
+    <a href="{% url 'login' %}" class="btn btn-danger">login</a>
+    {% else %}
+        <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+    {% endif %}
+    <h1>Home {{user}}</h1>
+    <div class="search">
+        <form action="{% url 'search' %}" method="GET" class="form-inline form-group">
+            {% csrf_token %} 
+            <input type="text" name = "q" placeholder="Type Here ..." class="form-control text-form" required>
+            <input type="Submit" value="Search" class="btn btn-dark submit-btn">
+        </form>
+    </div>
+    <button class="btn btn-light" id="image-upload">Add Image</button>
+    Categories <a href="{% url 'cat' %}" class="btn btn-light" id="add-category">+</a>
+    {% for i in categories %}
+        <a href="{% url 'cat' %}" class="btn btn-light" id="add-category">{{ i.name }}</a>
+    {% endfor %}
+
+    <br>
+    {% for i in images %}
+        <a href="{% url 'shared' id=i.id %}"><img src="{{ i.url.url }}" alt="Sorry! Image not found" height="400px" width="600px" id="image-detail"></a>
+        <div class="bg-model-1">
+            <div class="model-content-1">
+                <div class="close-1">+</div>
+                <h1>Upload Image</h1>
+                
+                <div class="img-form">
+                    {{i.title}}<br>
+                    {% if i.location %}
+                        {{i.location}}
+                    {% endif %}<br>
+                    {{i.description}}<br>
+                    <img src="{{ i.url.url }}" alt="Sorry! Image not found" height="200px" width="300px">
+                    
+                    <br>
+                    <br>
+                    {% if user.is_authenticated %}
+                        {% if user.id in like and i.id in like  %}
+                            <button class = "btn btn-sm btn-danger add-wishlist" data-product = "{{ i.id }}"><i class="fa fa-heart" aria-hidden="true"></i></button>
+                       {% endif %}
+                        <!-- {{ checkw }} -->
+                    {% else %}
+                        <button class = "btn btn-sm btn-danger disabled"><i class="fa fa-heart" aria-hidden="true"></i></button>
+                        <!-- {{ checkw }} -->
+                    {% endif %}
+                    <a href="{{ i.url.url }}" download class="btn btn-light"><i class="fa fa-download" aria-hidden="true"></i></a>
+                    <a href="{% url 'shared' id=i.id %}"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+                    
+                </div>
+
+            </div>
+        </div> 
+    {% endfor %}
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'stock_app/action.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'stock_app/dropify/js/dropify.min.js' %}"></script>
+    <script src="{% static 'stock_app/dropify/js/dropify.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('.dropify').dropify();
+       });
+   </script>
+    
+{% endblock %}

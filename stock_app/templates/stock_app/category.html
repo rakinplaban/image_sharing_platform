@@ -1,0 +1,61 @@
+{% extends 'stock_app/layout.html' %}
+
+{% load static %}
+{% load social_share %}
+{% block title %}Home {% endblock %}
+
+{% block body %}
+    {% if not user.is_authenticated %}
+    <a href="{% url 'login' %}" class="btn btn-danger">login</a>
+    {% else %}
+        <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+    {% endif %}
+    <h1>Home {{user}}</h1>
+    <div class="search">
+        <form action="{% url 'search' %}" method="GET" class="form-inline form-group">
+            {% csrf_token %} 
+            <input type="text" name = "q" placeholder="Type Here ..." class="form-control text-form" id="searchbar" required>
+            <input type="Submit" value="Search" class="btn btn-dark submit-btn">
+        </form>
+    </div>
+    <a href="{% url 'add' %}" class="btn btn-light">Add Image</a>
+    <a href="{% url 'index' %}" class="btn btn-light">Home</a>
+    Categories <a href="{% url 'cat' %}" class="btn btn-light" id="add-category">+</a>
+    {% for category in categories %}
+        <a href="{% url 'category' category.slug %}" class="btn btn-light" id="add-category">{{ category.name }}</a>
+    {% endfor %}
+
+    <br>
+    {% for photo in photos %}
+        <a href="{% url 'shared' id=photo.id %}"><img src="{{ photo.url.url }}" alt="Sorry! Image not found" height="400px" width="600px" id="image-detail"></a>
+    {% endfor %}
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'stock_app/action.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'stock_app/dropify/js/dropify.min.js' %}"></script>
+    <script src="{% static 'stock_app/dropify/js/dropify.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('.dropify').dropify();
+       });
+   </script>
+   <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+   <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+   <script>
+       $( function() {
+           var availableTags = [
+               {% for category in categories %}
+                   "{{category.name}}",
+               {% endfor %}
+           ];
+           $( "#searchbar" ).autocomplete({
+             source: availableTags
+           });
+       });
+   </script>
+   
+    
+{% endblock %}
